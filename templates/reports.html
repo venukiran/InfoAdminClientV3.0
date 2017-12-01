@@ -1,0 +1,120 @@
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>Reports</strong></h2>
+    </div>
+    <div class="row" style="margin-bottom:2px;">
+        <div class="col-sm-1">
+            <div class="dataTables_length" id="example-datatable_length">
+                <label>
+                    <select name="example-datatable_length" aria-controls="example-datatable" class="form-control" ng-model="viewby" ng-change="setItemsPerPage(viewby)" ng-options="number as number for number in tableRows">
+                    </select>
+                </label>
+            </div>
+        </div>
+        <!-- <div class="col-sm-1"></div> -->
+        <div class="col-sm-2">
+            <div class="input-group">
+                <input type="text" data-date-today-btn="linked" data-date-today-highlight="true" class="form-control" ng-model="report.startDate" data-provide="datepicker" data-date-autoclose="true" data-date-format='yyyy-mm-dd' ng-focus="selectedCal1=!selectedCal1;err.START_DATE=false" placeholder="Enter start date" call-date="selectedCal1">
+                <label for="date-picker-2" class="input-group-addon btn" ng-click="selectedCal1=!selectedCal1;"><span class="fa fa-calendar"></span></label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="input-group">
+                <input type="text" data-date-today-btn="linked" data-date-today-highlight="true" class="form-control" ng-model="report.endDate" data-provide="datepicker" data-date-autoclose="true" data-date-format='yyyy-mm-dd' ng-focus="selectedCal2=!selectedCal2;err.START_DATE=false" placeholder="Enter end date" call-date="selectedCal2">
+                <label for="date-picker-2" class="input-group-addon btn" ng-click="selectedCal2=!selectedCal2;"><span class="fa fa-calendar"></span></label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="example-datatable_filter" class="dataTables_filter">
+                <div>
+                    <select class="form-control" size="1" ng-model="report.locId" ng-options="location.locationId as location.name for location in busStationList">
+                        <option value="">Select Location</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="example-datatable_filter" class="dataTables_filter">
+                <div>
+                    <select class="form-control" size="1" ng-model="report.sponserId" ng-class="(err.sponserId==true) ? 'justBorder' : '' " ng-options="sponsor.sponserId as sponsor.name for sponsor in sponsorList">
+                        <option value="">Select Sponsor</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-primary btn-sm" style="width:100px;" ng-click="getReports(report);">Submit</button>
+        </div>
+        <div class="col-sm-1 pull-right" ng-if="reportsList.length">
+            <button class="btn btn-primary btn-sm pull-right" style="width:100px;" ng-click="exportFile()">Export</button>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive" style="overflow-y:auto">
+        <table id="example-datatable" ng-class="{'opacity':!reportsList.length}" class="table table-vcenter table-condensed table-bordered table-hover table-striped export-table">
+            <thead>
+                <tr>
+                    <th ng-class="(orderByField!='name') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='name'; reverseSort = !reverseSort">Play Id</a></th>
+                    <th ng-class="(orderByField!='number') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='number'; reverseSort = !reverseSort">Location</a></th>
+                    <th ng-class="(orderByField!='CITY') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='CITY'; reverseSort = !reverseSort">Video</a></th>
+                    <th ng-class="(orderByField!='CITY') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='CITY'; reverseSort = !reverseSort">Start Time</a></th>
+                    <th ng-class="(orderByField!='CITY') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='CITY'; reverseSort = !reverseSort">End Time</a></th>
+                    <th ng-class="(orderByField!='locid') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='locid'; reverseSort = !reverseSort">Status</a></th>
+                    <th ng-class="(orderByField!='CITY') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='CITY'; reverseSort = !reverseSort">Description</a></th>
+                    <th ng-class="(orderByField!='CITY') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='CITY'; reverseSort = !reverseSort">Sponsor</a></th>
+                    <th ng-class="(orderByField!='locid') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='locid'; reverseSort = !reverseSort">Play Date</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(uKey,report) in reportsList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | filter:userSearch | orderBy:orderByField:reverseSort">
+                    <td>{{report.playId}}</td>
+                    <td>{{report.locName}}</td>
+                    <td>{{report.videoName}}</td>
+                    <td>{{report.stTime}}</td>
+                    <td>{{report.endTime}}</td>
+                    <td>{{report.status}}</td>
+                    <td>{{report.description}}</td>
+                    <td>{{report.sponser}}</td>
+                    <td>{{report.playDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" ng-show="!reportsList.length">
+            <h3>No reports has been added.</h3>
+        </div>
+        <div class="text-center" ng-show="reportsList.length">
+            <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>
+        </div>
+    </div>
+    <div id="exportable" style="display:none">
+        <table ng-class="{'opacity':!reportsList.length}" class="table table-vcenter table-condensed table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Play Id</th>
+                    <th>Location</th>
+                    <th>Video</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Sponsor</th>
+                    <th>Play Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="report in reportsList">
+                    <td>{{report.playId}}</td>
+                    <td>{{report.locName}}</td>
+                    <td>{{report.videoName}}</td>
+                    <td>{{report.stTime}}</td>
+                    <td>{{report.endTime}}</td>
+                    <td>{{report.status}}</td>
+                    <td>{{report.description}}</td>
+                    <td>{{report.sponser}}</td>
+                    <td>{{report.playDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

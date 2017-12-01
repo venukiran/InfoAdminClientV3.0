@@ -1,0 +1,96 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <!-- <div class="form-group col-xs-6" ng-class="(err.CITY_ID == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="CITY_ID">City</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="server.CITY_ID" ng-class="(err.CITY_ID==true) ? 'justBorder' : '' ">
+                        <option value="">Select City</option>
+                        <option ng-repeat="city in citiesList" value={{city.id}}>{{city.name}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.CITY_ID">Please select city .</span>
+                </div>
+            </div> -->
+            <div class="form-group col-xs-6" ng-class="(err.locId == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="locId">Location</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="server.locId" ng-class="(err.locId==true) ? 'justBorder' : '' " ng-options="location.locationId as location.name for location in busStationList" ng-focus="err.locId=false;">
+                        <option value="">Select Location</option>
+                        <!-- <option ng-repeat="location in busStationList" value={{location.locationId}}>{{location.name}}</option> -->
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.locId">Please select location.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.ipAddress == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="ipAddress">IP Adress</label>
+                <div>
+                    <input type="text" ng-model="server.ipAddress" ng-focus="err.ipAddress=false;" name="ipAddress" class="form-control" placeholder="Enter IP Address..">
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.ipAddress">Please enter ip address.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.hostName == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="hostName ">Host</label>
+                <div>
+                    <input type="text" ng-model="server.hostName" ng-focus="err.hostName=false;" name="hostName" class="form-control" placeholder="Enter host name..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.hostName">Please enter host name.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.dreamstepUrl == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="dreamstepUrl ">Dreamstep URL</label>
+                <div>
+                    <input type="text" ng-model="server.dreamstepUrl" ng-focus="err.dreamstepUrl=false;" name="dreamstepUrl" class="form-control" placeholder="Enter dreamstep url..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.dreamstepUrl">Please enter dreamstep url.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.osType == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="osType ">Operating Sytem</label>
+                <div>
+                    <input type="text" ng-model="server.osType" ng-focus="err.osType=false;" name="osType" class="form-control" placeholder="Enter operating system..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.osType">Please enter operating system .</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.osVersion == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="osVersion ">OS Version</label>
+                <div>
+                    <input type="text" ng-model="server.osVersion" ng-focus="err.osVersion=false;" name="osVersion" class="form-control" placeholder="Enter OS Version..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.osVersion">Please enter OS Version.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-warning " ng-click="cancelServer();" style="width:100px;"> Cancel</button>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="saveServer(server);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updateServer(server);" style="width:100px; "> Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

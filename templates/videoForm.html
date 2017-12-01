@@ -1,0 +1,153 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.sponserId == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="sponserId">Sponsor</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="video.sponserId" ng-focus="err.sponserId=false;" ng-options="sponsor.sponserId as sponsor.name for sponsor in sponsorList">
+                        <option value="">Select Sponsor</option>
+                        <!-- <option ng-repeat="sponsor in sponsorList" value={{sponsor.sponserId}}>{{sponsor.name}}</option> -->
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.sponserId">Please select sponsor.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6 text-center"  style="height:242px">
+                <span id="fileselector">
+                    <label class="btn btn-default" for="upload-file-selector" ng-class="(err.video == true) ? 'has-error' : 'has-primary' " style="margin-top:75px">
+                        <input id="upload-file-selector" type="file" accept="video/mp4" ng-click="chooseFile();err.video=false">
+                            <i class="fa_icon icon-upload-alt margin-correction"></i>Upload Video
+                    </label>
+                </span>
+                <div>
+                    <span class="text-danger" ng-show="err.video">Please select video.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.height == true) ? 'has-error' : 'has-primary' ">
+                <video id="preview" class="img-thumbnail image" src="" controls style="width:270px;height:207px"></video>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-3" >
+                <label class="control-label" for="videoName">Name</label>
+                <div>
+                    <input type="text" ng-model="video.videoName" class="form-control" placeholder="Enter video name.." ng-disabled="true">
+                </div>
+                
+            </div>
+            <div class="form-group col-xs-3" >
+                <label class="control-label" for="playTime">Duration</label>
+                <div>
+                    <input type="text" ng-model="video.playTime" class="form-control" placeholder="Enter video playtime.." id="playTime" ng-disabled="true">
+                </div>
+               
+            </div>
+            <div class="form-group col-xs-3">
+                <label class="control-label" for="videoFormat ">Format</label>
+                <div>
+                    <input type="text" ng-model="video.videoFormat" class="form-control" placeholder="Enter video format.." ng-disabled="true">
+                </div>
+                
+            </div>
+            <div class="form-group col-xs-3">
+                <label class="control-label" for="fileSize ">Size</label>
+                <div>
+                    <input type="text" ng-model="video.fileSize" class="form-control" placeholder="Enter video file size.." ng-disabled="true">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.fileSize">Please enter video file size.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.orientation == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="orientation ">Orientation</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="video.orientation" ng-focus="err.orientation=false">
+                        <option value="">Select orientation</option>
+                        <option value="Horizontal">Horizontal</option>
+                        <option value="Vertical">Vertical</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.orientation">Please select orientation.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.videoCategory == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="width">videoCategory</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="video.videoCategory" ng-focus="err.videoCategory=false">
+                        <option value="">Select video category</option>
+                        <option value="Full">Full</option>
+                        <option value="L-Shape">L-Shape</option>
+                        <option value="R-Band">R-Band</option>
+                        <option value="R-Band">Strip</option>
+                        <option value="R-Band">Banner</option>
+                        <option value="R-Band">Bug</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.videoCategory">Please select videoCategory.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-3">
+                <label class="control-label" for="videoDescr ">Video Description</label>
+                <div>
+                    <input type="text" ng-model="video.videoDescr" class="form-control" placeholder="Enter video Description..">
+                </div>
+                <!-- <div>
+                    <span class="text-danger" ng-show="err.videoDescr">Please enter video description.</span>
+                </div> -->
+            </div>
+            <div class="form-group col-xs-3" ng-class="(err.validFrom == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="validFrom">Start Date</label>
+                <div ng-init="selectedCal1=false;">
+                    <div class="input-group">
+                        <input type="text" data-date-today-btn="linked" data-date-today-highlight="true" class="form-control" ng-model="video.validFrom" data-provide="datepicker" data-date-autoclose="true" data-date-format='yyyy-mm-dd' ng-focus="selectedCal1=!selectedCal1;err.validFrom=false" placeholder="Enter start date" call-date="selectedCal1">
+                        <label for="date-picker-2" class="input-group-addon btn" ng-click="selectedCal1=!selectedCal1;"><span class="fa fa-calendar"></span></label>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.validFrom">Please enter start date.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-3" ng-class="(err.validTo == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="validTo">End Date</label>
+                <div>
+                    <div class="input-group">
+                        <input type="text" data-date-today-btn="linked" data-date-today-highlight="true" class="form-control" ng-model="video.validTo" data-provide="datepicker" data-date-autoclose="true" data-date-format='yyyy-mm-dd' ng-focus="selectedCal2=!selectedCal2;err.validTo=false" placeholder="Enter end date" call-date="selectedCal2">
+                        <label for="date-picker-2" class="input-group-addon btn" ng-click="selectedCal2=!selectedCal2;"><span class="fa fa-calendar"></span></label>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.validTo">Please enter end date.</span>
+                </div>
+            </div><div class="form-group col-xs-6" ng-class="(err.status==true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label " for="status">Status</label>
+                <div>
+                    <label class="switch switch-primary ">
+                        <input type="checkbox" ng-model="video.status"><span></span></label>
+                    <span ng-show="video.status">Active</span>
+                    <span ng-hide="video.status">InActive</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-warning " ng-click="cancelVideo();" style="width:100px;"> Cancel</button>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="saveVideo(video);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updateVideo(video);" style="width:100px; "> Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,54 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.name == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="name">Role Name</label>
+                <div>
+                    <input type="text" ng-model="platform.name" maxlength="15" onkeypress="return ValidateAlpha(event);" ng-pattern="/^[a-zA-Z\s]*$/" ng-focus="err.name=false;" class="form-control" placeholder="Enter Role name.." required>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.name">Please enter Role name .</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <!-- <div class="form-group col-xs-6" ng-class="(err.CITY_ID == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="CITY_ID">City</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="platform.CITY_ID" ng-class="(err.CITY_ID==true) ? 'justBorder' : '' ">
+                        <option value="">Select City</option>
+                        <option ng-repeat="city in citiesList" value={{city.id}}>{{city.name}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.CITY_ID">Please select city.</span>
+                </div>
+            </div> -->
+            <!-- <pre>{{busStationList}}</pre> -->
+            <div class="form-group col-xs-6" ng-class="(err.locId == true) ? 'has-error' : 'has-primary' ">
+                <input type="checkbox" id="cbgroup1_master" onchange="togglecheckboxes(this,'cbgroup1')"> Selecet Roll Name <br><hr>
+				<input type="checkbox" id="cb1_1" class="cbgroup1" name="cbg1[]" value="1"> Bus Station Master<br>
+				<input type="checkbox" id="cb1_2" class="cbgroup1" name="cbg1[]" value="2"> Platform Master<br>
+				<input type="checkbox" id="cb1_3" class="cbgroup1" name="cbg1[]" value="3"> Screen Master<br>
+				<input type="checkbox" id="cb1_4" class="cbgroup1" name="cbg1[]" value="4"> Sponser Master<br>
+				<input type="checkbox" id="cb1_4" class="cbgroup1" name="cbg1[]" value="4"> Video Master<br>
+				<input type="checkbox" id="cb1_4" class="cbgroup1" name="cbg1[]" value="4"> Scroll Text<br>							<input type="checkbox" id="cb1_4" class="cbgroup1" name="cbg1[]" value="4"> Server Master<br>
+				<input type="checkbox" id="cb1_4" class="cbgroup1" name="cbg1[]" value="4"> Slot Tracer Master<br>					<input type="checkbox" id="cb1_4" class="cbgroup1" name="cbg1[]" value="4"> Slot Booking Master<br>
+			</div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="savePlatform(platform);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updatePlatform(platform);" style="width:100px; "> Update</button>
+                    <button class="btn btn-md btn-warning " ng-click="cancelPlatform();" style="width:100px;"> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

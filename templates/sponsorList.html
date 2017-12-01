@@ -1,0 +1,70 @@
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>Sponsor List</strong></h2>
+    </div>
+    <div class="row" style="margin-bottom:2px;">
+        <div class="col-sm-1">
+            <div class="dataTables_length" id="example-datatable_length">
+                <label>
+                    <select name="example-datatable_length" aria-controls="example-datatable" class="form-control" ng-model="viewby" ng-change="setItemsPerPage(viewby)" ng-options="number as number for number in tableRows">
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="example-datatable_filter" class="dataTables_filter">
+                <label>
+                    <div class="input-group">
+                        <input ng-focus="showAlltableRows();" type="search" class="form-control" placeholder="Search" aria-controls="example-datatable" ng-model="userSearch">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span></div>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2 pull-right">
+            <button class="btn btn-primary btn-sm pull-right" style="width:100px;" ng-click="addSponsor();">Add New</button>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive" style="overflow-y:auto">
+        <table id="example-datatable" ng-class="{'opacity':!sponsorList.length}" class="table table-vcenter table-condensed table-bordered table-hover table-striped export-table">
+            <thead>
+                <tr>
+                    <th ng-class="(orderByField!='sponserId') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='sponserId'; reverseSort = !reverseSort">Sponser Id</a></th>
+                    <th ng-class="(orderByField!='name') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='name'; reverseSort = !reverseSort">Sponser Name</a></th>
+                    <th ng-class="(orderByField!='city') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='city'; reverseSort = !reverseSort">City</a></th>
+                    <th ng-class="(orderByField!='address1') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='address1'; reverseSort = !reverseSort">Address1</a></th>
+                    <th ng-class="(orderByField!='address2') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='address2'; reverseSort = !reverseSort">Address2</a></th>
+                    <th ng-class="(orderByField!='state') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='state'; reverseSort = !reverseSort">State</a></th>
+                    <th ng-class="(orderByField!='contactPerson') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='contactPerson'; reverseSort = !reverseSort">Contact Person</a></th>
+                    <th ng-class="(orderByField!='phone') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='phone'; reverseSort = !reverseSort">Phone</a></th>
+                    <th ng-class="(orderByField!='email') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='email'; reverseSort = !reverseSort">Email</a></th>
+                    <th class="text-center"><a href>Operations</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(uKey,sponsor) in sponsorList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | filter:userSearch | orderBy:orderByField:reverseSort">
+                    <td>{{sponsor.sponserId}}</td>
+                    <td>{{sponsor.name}}</td>
+                    <td>{{sponsor.city}}</td>
+                    <td>{{sponsor.address1}}</td>
+                    <td>{{sponsor.address2}}</td>
+                    <td>{{sponsor.state}}</td>
+                    <td>{{sponsor.contactPerson}}</td>
+                    <td>{{sponsor.phone}}</td>
+                    <td>{{sponsor.email}}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="editSponsor(sponsor);" style="width:85px;"> Edit </button>
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="deleteSponsor(sponsor);" style="width:85px;">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" ng-show="!sponsorList.length">
+            <h3>No sponsor has been added.</h3>
+        </div>
+        <div class="text-center" ng-show="sponsorList.length">
+            <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>
+        </div>
+    </div>
+</div>

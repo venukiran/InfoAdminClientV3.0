@@ -1,0 +1,109 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.videoId == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="videoId">Video</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="slot.videoId" ng-focus="err.videoId=false;" ng-options="video.videoId as video.videoName for video in videoList" ng-disabled="page.populateVideo">
+                        <option value="">Select Video</option>
+                        <!--  <option ng-repeat="video in videoList" value={{video.VIDEO_ID}}>{{video.VIDEO_NAME}}</option> -->
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.videoId">Please select video.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <label class="control-label" for="selectedLocations ">Location</label>
+                <div>
+                    <!-- <select class="form-control" size="1" ng-model="slot.locationId" ng-class="(err.CITY==true) ? 'justBorder' : '' " ng-options="location.locationId as location.name for location in busStationList">
+                        <option value="">Select Location</option>
+                    </select> -->
+                    <div ng-dropdown-multiselect="" class="multipleSelect" extra-settings="dropdownSettings" options="locationOptions" selected-model="selectedLocations" ng-click="err.selectedLocations=false" translation-texts="translationText" checkboxes="true">
+                    </div>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.selectedLocations">Please select atleast one location.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-4" ng-class="(err.startDate == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="startDate">Start Date</label>
+                <div ng-init="selectedCal1=false;">
+                    <div class="input-group">
+                        <input type="text" data-date-today-btn="linked" data-date-today-highlight="true" class="form-control" ng-model="slot.startDate" data-provide="datepicker" data-date-autoclose="true" data-date-format='yyyy-mm-dd' ng-focus="selectedCal1=!selectedCal1;err.startDate=false" placeholder="Enter start date" call-date="selectedCal1">
+                        <label for="date-picker-2" class="input-group-addon btn" ng-click="selectedCal1=!selectedCal1;"><span class="fa fa-calendar"></span></label>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.startDate">Please enter start date.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-2" ng-class="(err.startTime == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="startTime">Start Time</label>
+                <div>
+                    <div class="input-group bootstrap-timepicker timepicker">
+                        <!-- <input id="timepicker1" type="text" class="form-control input-small" ng-model="slot.START_TIME"> -->
+                        <select class="form-control" size="1" ng-model="slot.startTime" ng-focus="err.startTime=false" ng-options="hour as hour for hour in hoursObj">
+                            <option value="">Select Time</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.startTime">Please enter start time.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-4" ng-class="(err.endDate == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="endDate">End Date</label>
+                <div ng-init="selectedCal2=false;">
+                    <div class="input-group">
+                        <input type="text" data-date-today-btn="linked" data-date-today-highlight="true" class="form-control" ng-model="slot.endDate" data-provide="datepicker" data-date-autoclose="true" data-date-format='yyyy-mm-dd' ng-focus="selectedCal2=!selectedCal2;err.endDate=false" placeholder="Enter end date" call-date="selectedCal2">
+                        <label for="date-picker-2" class="input-group-addon btn" ng-click="selectedCal2=!selectedCal2;"><span class="fa fa-calendar"></span></label>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.endDate">Please enter end date.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-2" ng-class="(err.endTime == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="endTime">End Time</label>
+                <div>
+                    <div class="input-group bootstrap-timepicker timepicker">
+                        <!-- <input id="timepicker2" type="text" class="form-control input-small" ng-model="slot.END_TIME">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span> -->
+                        <select class="form-control" size="1" ng-model="slot.endTime" ng-focus="err.endTime=false" ng-options="hour as hour for hour in hoursObj">
+                            <option value="">Select Time</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.endTime">Please enter end time.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-3" ng-class="(err.repeatsPerDay == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="repeatsPerDay">Repeats for day</label>
+                <div>
+                    <input type="text" ng-model="slot.repeatsPerDay" ng-focus="err.repeatsPerDay=false;" name="repeatsPerDay" class="form-control" placeholder="Enter repeats for day.." phone-num-dir>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.repeatsPerDay">Please enter repeats for day.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-warning " ng-click="cancelSlot();" style="width:100px;"> Cancel</button>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="saveSlot(slot);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updateSlot(slot);" style="width:100px; "> Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

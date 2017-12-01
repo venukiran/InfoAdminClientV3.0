@@ -1,0 +1,62 @@
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>Screen List</strong></h2>
+    </div>
+    <div class="row" style="margin-bottom:2px;">
+        <div class="col-sm-1">
+            <div class="dataTables_length" id="example-datatable_length">
+                <label>
+                    <select name="example-datatable_length" aria-controls="example-datatable" class="form-control" ng-model="viewby" ng-change="setItemsPerPage(viewby)" ng-options="number as number for number in tableRows">
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="example-datatable_filter" class="dataTables_filter">
+                <label>
+                    <div class="input-group">
+                        <input ng-focus="showAlltableRows();" type="search" class="form-control" placeholder="Search" aria-controls="example-datatable" ng-model="userSearch">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span></div>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2 pull-right">
+            <button class="btn btn-primary btn-sm pull-right" style="width:100px;" ng-click="addScreen();">Add New</button>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive" style="overflow-y:auto">
+        <table id="example-datatable" ng-class="{'opacity':!screenList.length}" class="table table-vcenter table-condensed table-bordered table-hover table-striped export-table">
+            <thead>
+                <tr>
+                    <th ng-class="(orderByField!='name') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='name'; reverseSort = !reverseSort">Name</a></th>
+                    <th ng-class="(orderByField!='orientation') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='orientation'; reverseSort = !reverseSort">Orientation</a></th>
+                    <th ng-class="(orderByField!='resolution') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='resolution'; reverseSort = !reverseSort">Resolution</a></th>
+                    <th ng-class="(orderByField!='browserType') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='browserType'; reverseSort = !reverseSort">Browse Type</a></th>
+                    <th ng-class="(orderByField!='version') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='version'; reverseSort = !reverseSort">Version</a></th>
+                    <th class="text-center"><a href>Operation</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(uKey,screen) in screenList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | filter:userSearch | orderBy:orderByField:reverseSort">
+                    <td>{{screen.name}}</td>
+                    <td>{{screen.orientation}}</td>
+                    <td>{{screen.resolution}}</td>
+                    <td>{{screen.browserType}}</td>
+                    <td>{{screen.version}}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="editScreen(screen);" style="width:85px;"> Edit </button>
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="deleteScreen(screen);" style="width:85px;">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" ng-show="!screenList.length">
+            <h3>No screen has been added.</h3>
+        </div>
+        <div class="text-center" ng-show="screenList.length">
+            <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>
+        </div>
+    </div>
+</div>

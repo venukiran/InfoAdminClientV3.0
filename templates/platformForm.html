@@ -1,0 +1,63 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.name == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="name">Name</label>
+                <div>
+                    <input type="text" ng-model="platform.name" ng-focus="err.name=false;" class="form-control" placeholder="Enter platform name.." name-dir>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.name">Please enter name .</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.number == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="number">Number</label>
+                <div>
+                    <input type="text" ng-model="platform.number" ng-focus="err.number=false;" name="number" class="form-control" placeholder="Enter platform number.." platform-dir>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.number">Please enter platform number.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <!-- <div class="form-group col-xs-6" ng-class="(err.CITY_ID == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="CITY_ID">City</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="platform.CITY_ID" ng-class="(err.CITY_ID==true) ? 'justBorder' : '' ">
+                        <option value="">Select City</option>
+                        <option ng-repeat="city in citiesList" value={{city.id}}>{{city.name}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.CITY_ID">Please select city.</span>
+                </div>
+            </div> -->
+            <!-- <pre>{{busStationList}}</pre> -->
+            <div class="form-group col-xs-6" ng-class="(err.locId == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="locId ">Location</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="platform.locId" ng-class="(err.locId==true) ? 'justBorder' : '' " ng-options="location.locationId as location.name for location in busStationList" ng-focus="err.locId=false;">
+                        <option value="">Select Location</option>
+                        <!-- <option ng-repeat="location in busStationList" value={{location.locationId}}>{{location.name}}</option> -->
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.locId">Please select location.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-warning " ng-click="cancelPlatform();" style="width:100px;"> Cancel</button>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="savePlatform(platform);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updatePlatform(platform);" style="width:100px; "> Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

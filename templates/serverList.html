@@ -1,0 +1,65 @@
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>Server List</strong></h2>
+    </div>
+    <div class="row" style="margin-bottom:2px;">
+        <div class="col-sm-1">
+            <div class="dataTables_length" id="example-datatable_length">
+                <label>
+                    <select name="example-datatable_length" aria-controls="example-datatable" class="form-control" ng-model="viewby" ng-change="setItemsPerPage(viewby)" ng-options="number as number for number in tableRows">
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="example-datatable_filter" class="dataTables_filter">
+                <label>
+                    <div class="input-group">
+                        <input ng-focus="showAlltableRows();" type="search" class="form-control" placeholder="Search" aria-controls="example-datatable" ng-model="userSearch">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span></div>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2 pull-right">
+            <button class="btn btn-primary btn-sm pull-right" style="width:100px;" ng-click="addServer();">Add New</button>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive" style="overflow-y:auto">
+        <table id="example-datatable" ng-class="{'opacity':!serverList.length}" class="table table-vcenter table-condensed table-bordered table-hover table-striped export-table">
+            <thead>
+                <tr>
+                   <!--  <th ng-class="(orderByField!='CITY') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='CITY'; reverseSort = !reverseSort">City</a></th> -->
+                    <th ng-class="(orderByField!='locId') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='locId'; reverseSort = !reverseSort">Location</a></th>
+                    <th ng-class="(orderByField!='ipAddress') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='ipAddress'; reverseSort = !reverseSort">IP Address</a></th>
+                    <th ng-class="(orderByField!='hostName') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='hostName'; reverseSort = !reverseSort">Host Name</a></th>
+                    <th ng-class="(orderByField!='dreamstepUrl') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='dreamstepUrl'; reverseSort = !reverseSort">Dreamstep URL</a></th>
+                    <th ng-class="(orderByField!='osType') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='osType'; reverseSort = !reverseSort">Operating System</a></th>
+                     <th ng-class="(orderByField!='osVersion') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='osVersion'; reverseSort = !reverseSort">Version</a></th>
+                     <th><a href="">Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(uKey,server) in serverList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | filter:userSearch | orderBy:orderByField:reverseSort">
+                    <td>{{server.locationName}}</td>
+                    <td>{{server.ipAddress}}</td>
+                    <td>{{server.hostName}}</td>
+                    <td>{{server.dreamstepUrl}}</td>
+                    <td>{{server.osType}}</td>
+                    <td>{{server.osVersion}}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="editServer(server);" style="width:85px;"> Edit </button>
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="deleteServer(server);" style="width:85px;">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" ng-show="!serverList.length">
+            <h3>No server has been added.</h3>
+        </div>
+        <div class="text-center" ng-show="serverList.length">
+            <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>
+        </div>
+    </div>
+</div>

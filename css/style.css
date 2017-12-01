@@ -1,0 +1,61 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+#main-container.fullScreen {
+    margin-left: 0px;
+}
+
+.selectApp {
+    padding: 5px 7px;
+    line-height: 40px;
+    text-align: center;
+    color: #394263;
+    position: relative;
+    margin-bottom: 0px;
+}
+
+.selectApp .col-xs-6 {
+    padding: 0px;
+}
+
+.opacity {
+    opacity: 0.3;
+}
+
+.changePsw .errors {
+    min-height: 5px;
+}
+
+#logo{
+    padding: 5px 0px;
+}
+
+
+
+#forgotPsw{
+    padding: 5px 15px;
+}
+
+#forgotPsw a{
+    color: #CF921E;
+}
+
+.custom-marker{
+    min-width: 45px;
+}
+
+#upload-file-selector {
+    display:none;   
+}
+.margin-correction {
+    margin-right: 10px;   
+}
+
+.multiselect-parent > .dropdown-toggle {
+     width: 300px;
+}
+
+.multiselect-parent > ul.dropdown-menu {
+    width: 100%;
+}

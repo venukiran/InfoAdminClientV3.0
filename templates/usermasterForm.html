@@ -1,0 +1,102 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.firstName == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="firstName">First Name</label>
+                <div>
+                    <input type="text" ng-model="user.firstName"  maxlength="30"  ng-focus="err.firstName=false;" class="form-control" placeholder="Enter First Name.." name-dir>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.firstName">Please enter First name .</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.lastName == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="lastName">Last name</label>
+                <div>
+                    <input type="text" ng-model="user.lastName" ng-focus="err.lastName=false;" name="lastName" class="form-control" placeholder="Enter Last Name.." name-dir>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.lastName">Please enter Last Name</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.loginId == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="loginId">Login ID</label>
+                <div>
+                    <input type="text" ng-model="user.loginId"  maxlength="30" ng-focus="err.loginId=false;" class="form-control" placeholder="Enter Login Id.." required>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.loginId">Please enter Login Id..</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.password == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="password">Password</label>
+                <div>
+                    <input type="password" ng-model="user.password" maxlength="15" ng-focus="err.password=false;" name="password" class="form-control" placeholder="Enter Password..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.password">Please enter Password</span>
+                </div>
+            </div>
+        </div>        
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.address==true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="address">Address</label>
+                <div>
+                    <input type="text" ng-model="user.address" maxlength="50" name="address" ng-focus="err.address=false;" class="form-control" placeholder="Enter Address.. " name-dir>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.address ">Please enter Address.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.email==true) ? 'has-error' : (err.email_cdn == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="email">email</label>
+                <div>
+                    <input type="text" ng-model="user.email" ng-focus="err.email=false;" class="form-control" placeholder="Enter email.. " required>
+                </div>
+                <div>
+                    <span class="text-danger"  ng-show="err.email ">Please enter email.</span>
+                    <span class="text-danger " ng-show="err.email_cdn ">Please enter valid email.</span>
+                </div>
+            </div>
+        </div>        
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.phone==true) ? 'has-error' : (err.phone_cdn == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="phone">Phone</label>
+                <div>
+                    <input type="text" ng-model="user.phone" maxlength="50" name="phone" ng-focus="err.phone=false;" class="form-control" placeholder="Enter Phone Number.. " phone-num-dir>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.phone ">Please enter phone number.</span>
+                    <span class="text-danger " ng-show="err.phone_cdn ">Phone number should be of 10 digits.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.roleId==true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="roleId">Role Id</label>
+                <div>
+                     <select class="form-control" size="1" ng-model="user.roleId" ng-class="(err.roleId==true) ? 'justBorder' : '' " ng-focus="err.roleId=false;">
+                        <option value="">Select Role</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Guest</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger"  ng-show="err.roleId ">Please enter Role Id.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="saveUserMaster(user);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updateUserMaster(user);" style="width:100px; "> Update</button>
+                    <button class="btn btn-md btn-warning " ng-click="cancelUserMaster();" style="width:100px;"> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

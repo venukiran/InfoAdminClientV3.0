@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app="infoBus">
+
+<head>
+    <meta charset="utf-8">
+    <title>Info Bus</title>
+    <meta name="description" content="ProUI is a Responsive Bootstrap Admin Template created by pixelcave and published on Themeforest.">
+    <meta name="keywords" content="ng-map,AngularJS,center">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-timepicker.css">
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/fontFamily.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/flatie.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body ng-controller="mainCtrl" ng-cloak>
+    <div id="loader" ng-show="NProgress"></div>
+    <div id="page-wrapper">
+        <div class="preloader themed-background">
+        </div>
+        <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+            <div id="sidebar" ng-show="(loginStatus && admin.statusCode != '302' && admin.userType != 'user')">
+                <div class="sidebar-scroll">
+                    <div class="sidebar-content">
+                        <a href="#/" class="sidebar-brand">
+                            <img src="images/logo.png" height="100%" width="100%" id="logo">
+                            <!-- <strong>infoBus </strong> -->
+                        </a>
+                        <ul class="sidebar-nav">
+                            <li> <a href="javascript:void(0)" ng-click="gotoHome();loadDashboard()" ng-class="{'active':activeTab.dashboard}"><i class="fa fa-tachometer sidebar-nav-icon"></i>Dashboard</a> </li>
+                            <li> <a href="javascript:void(0)" ng-click="goToBusStationMaster();" ng-class="{'active':activeTab.busStationMaster}"><i class="fa fa-thumb-tack sidebar-nav-icon"></i>Bus Station Master</a> </li>
+                            <li> <a href="javascript:void(0)" ng-click="goToPlatformMaster();" ng-class="{'active':activeTab.platformMaster}"><i class="fa fa-bullhorn sidebar-nav-icon"></i>Platform Master</a> </li>
+                            <li> <a href="javascript:void(0)" ng-click="goToScreenMaster();" ng-class="{'active':activeTab.screenMaster}"><i class="fa fa-desktop sidebar-nav-icon"></i>Screen Master</a> </li>
+                            <!-- <li> <a href="javascript:void(0)" ng-click="goToScreenPosition();" ng-class="{'active':activeTab.screenPosition}"><i class="fa fa-bullseye sidebar-nav-icon"></i>Screen Postition</a> </li> -->
+                            <li> <a href="javascript:void(0)" ng-click="goToSponsorMaster();" ng-class="{'active':activeTab.sponsorMaster}"><i class="fa fa-bus sidebar-nav-icon"></i>Sponsor Master</a> </li>
+                            <li> <a href="javascript:void(0)" ng-click="goToVideoMaster();" ng-class="{'active':activeTab.videoMaster}"><i class="fa fa-video-camera sidebar-nav-icon"></i>Video Master</a> </li>
+                            <li> <a href="javascript:void(0)" ng-click="goToScrollText();" ng-class="{'active':activeTab.scrollText}"><i class="fa fa-file-text-o sidebar-nav-icon"></i>Scroll Text</a> </li>
+                            <li> <a href="javascript:void(0)" ng-click="goToServerMaster();" ng-class="{'active':activeTab.serverMaster}"><i class="fa fa-database sidebar-nav-icon"></i>Server Master</a> </li>
+                            <li> <a href="javascript:void(0)" ng-click="goToSlotTrackerMaster();" ng-class="{'active':activeTab.slotTrackerMaster}"><i class="fa fa-database sidebar-nav-icon"></i>Slot Tracker Master</a> </li>
+                            <li> <a href="javascript:void(0)" ng-click="goToSlotBookingMaster();" ng-class="{'active':activeTab.slotBookingMaster}"><i class="fa fa-database sidebar-nav-icon"></i>Slot Booking Master</a> </li>
+                            <li><a href="javascript:void(0)" ng-click="goToUserMaster();" ng-class="{'active':activeTab.usermaster}"><i class="fa fa-database sidebar-nav-icon"></i>User Master</a></li>
+                            <li><a href="javascript:void(0)" ng-click="goToReports();" ng-class="{'active':activeTab.reports}"><i class="fa fa-download sidebar-nav-icon"></i>Reports</a></li>
+                            <!-- <li><a href="javascript:void(0)" ng-click="goToRoleMaster();" ng-class="{'active':activeTab.RoleMaster}"><i class="fa fa-database sidebar-nav-icon"></i>Role Master</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="main-container" ng-class="{'fullScreen':!loginStatus}">
+                <header class="navbar navbar-default loginStatus" ng-show="loginStatus">
+                    <ul class="nav navbar-nav-custom">
+                        <li>
+                            <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
+                                <i class="fa fa-bars fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav-custom pull-right">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span>Welcome <strong>{{admin.displayName}}</strong></span>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                                <li class="dropdown-header text-center">Account</li>
+                                <li>
+                                    <a href ui-sref="Change-Password"> Change Password
+                                                <i class="fa fa-unlock fa-fw pull-right"></i>
+                                            </a>
+                                    <a href ng-click="logout(true);"> Sign Out
+                                                <i class="fa fa-sign-out fa-fw pull-right"></i>
+                                            </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </header>
+                <div id="page-content" style="min-height:620px">
+                    <div ui-view></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/tableExport.js"></script>
+    <script type="text/javascript" src="js/jquery.base64.js"></script>
+    <script src="js/angular.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
+    <script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/angularjs-dropdown-multiselect.js"></script>
+    <script type="text/javascript" src="js/angularjs-dropdown-multiselect.js"></script>
+    <script type="text/javascript" src="js/bootstrap-timepicker.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script type="text/javascript" src="js/angular-geohash.min.js"></script>
+    <script type="text/javascript" src="js/angular-ui-router.js"></script>
+    <script type="text/javascript" src="js/ng-map.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/pages/uiProgress.js"></script>
+    <!-- END User Settings -->
+    <script type="text/javascript" src="js/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="config/route.js"></script>
+    <script type="text/javascript" src="config/Base64.js"></script>
+    <script type="text/javascript" src="config/settings.js"></script>
+    <script type="text/javascript" src="controllers/mainCtrl.js"></script>
+    <script type="text/javascript" src="controllers/loginCtrl.js"></script>
+    <script type="text/javascript" src="controllers/homeCtrl.js"></script>
+    <script type="text/javascript" src="controllers/busStationMasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/roleMasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/platformMasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/screenMasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/screenPositionCtrl.js"></script>
+    <script type="text/javascript" src="controllers/sponsorMasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/videoMasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/scrollTextCtrl.js"></script>
+    <script type="text/javascript" src="controllers/serverCtrl.js"></script>
+    <script type="text/javascript" src="controllers/slotTrackerMasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/slotBookingMasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/usermasterCtrl.js"></script>
+    <script type="text/javascript" src="controllers/reportsCtrl.js"></script>
+</body>
+
+</html>

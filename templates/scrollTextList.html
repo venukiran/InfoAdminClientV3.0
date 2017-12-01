@@ -1,0 +1,61 @@
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>Scroll Text List</strong></h2>
+    </div>
+    <div class="row" style="margin-bottom:2px;">
+        <div class="col-sm-1">
+            <div class="dataTables_length" id="example-datatable_length">
+                <label>
+                    <select name="example-datatable_length" aria-controls="example-datatable" class="form-control" ng-model="viewby" ng-change="setItemsPerPage(viewby)" ng-options="number as number for number in tableRows">
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div id="example-datatable_filter" class="dataTables_filter">
+                <label>
+                    <div class="input-group">
+                        <input ng-focus="showAlltableRows();" type="search" class="form-control" placeholder="Search" aria-controls="example-datatable" ng-model="userSearch">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span></div>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2 pull-right">
+            <button class="btn btn-primary btn-sm pull-right" style="width:100px;" ng-click="addScrollText();">Add New</button>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive" style="overflow-y:auto">
+        <table id="example-datatable" ng-class="{'opacity':!scrollTextList.length}" class="table table-vcenter table-condensed table-bordered table-hover table-striped export-table">
+            <thead>
+                <tr>
+                    <th ng-class="(orderByField!='locationName') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='locationName'; reverseSort = !reverseSort">Location</a></th>
+                    <th ng-class="(orderByField!='msgContent') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='msgContent'; reverseSort = !reverseSort">Message</a></th>
+                    <th ng-class="(orderByField!='msgType') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='msgType'; reverseSort = !reverseSort">Type</a></th>
+                    <th ng-class="(orderByField!='status') ? 'sorting' : (reverseSort ? 'sorting_desc' : 'sorting_asc')"><a href ng-click="orderByField='status'; reverseSort = !reverseSort">Status</a></th>
+                    <th><a href>Operation</a></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(uKey,scrollText) in scrollTextList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | filter:userSearch | orderBy:orderByField:reverseSort">
+                    <td>{{scrollText.locationName}}</td>
+                    <td>{{scrollText.msgContent}}</td>
+                    <td>{{scrollText.msgType}}</td>
+                    <td>{{scrollText.status}}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="editScrollText(scrollText);" style="width:85px;"> Edit </button>
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="deleteScrollText(scrollText);" style="width:85px;">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" ng-show="!scrollTextList.length">
+            <h3>No scrollText has been added.</h3>
+        </div>
+        <div class="text-center" ng-show="scrollTextList.length">
+            <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>
+        </div>
+    </div>
+</div>

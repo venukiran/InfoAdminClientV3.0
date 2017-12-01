@@ -1,0 +1,92 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.CITY_ID == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="CITY_ID">City</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="position.CITY_ID" ng-class="(err.CITY_ID==true) ? 'justBorder' : '' ">
+                        <option value="">Select City</option>
+                        <option ng-repeat="city in citiesList" value={{city.id}}>{{city.name}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.CITY_ID">Please select city .</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.LOC_ID == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="LOC_ID">Location</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="position.LOC_ID" ng-class="(err.LOC_ID==true) ? 'justBorder' : '' ">
+                        <option value="">Select Location</option>
+                        <option ng-repeat="location in locationsList" value={{location.id}}>{{location.name}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.LOC_ID">Please select location.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.PLATFORM_ID == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="PLATFORM_ID">Platform</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="position.PLATFORM_ID" ng-class="(err.PLATFORM_ID==true) ? 'justBorder' : '' ">
+                        <option value="">Select Platform</option>
+                        <option ng-repeat="platform in platformList" value={{platform.PLATFORM_ID}}>{{platform.NAME}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.PLATFORM_ID">Please select platform.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.SCREEN_ID == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="SCREEN_ID ">Screen</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="position.SCREEN_ID" ng-class="(err.CITY==true) ? 'justBorder' : '' ">
+                        <option value="">Select Screen</option>
+                        <option ng-repeat="screen in screenList" value={{screen.SCREEN_ID}}>{{screen.NAME}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.SCREEN_ID">Please select screen.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.AREA == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="AREA">Area</label>
+                <div>
+                   <input type="text" ng-model="position.AREA" ng-focus="err.AREA=false;" class="form-control" placeholder="Enter area..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.AREA">Please enter area.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.ORIENTATION == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="ORIENTATION ">Orientation</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="position.ORIENTATION" ng-class="(err.ORIENTATION==true) ? 'justBorder' : '' ">
+                        <option value="">Select Orientation</option>
+                        <option value="Horizontal">Horizontal</option>
+                        <option value="Vertical">Vertical</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.SCREEN_ID">Please select screen.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="saveScreenPosition(position);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updateScreenPosition(position);" style="width:100px; "> Update</button>
+                    <button class="btn btn-md btn-warning " ng-click="cancelScreenPosition();" style="width:100px;"> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

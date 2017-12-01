@@ -1,0 +1,120 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.locationName == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="locationName">Location Name</label>
+                <div>
+                    <input type="text" ng-model="busStation.name" ng-focus="err.locationName=false;" class="form-control" placeholder="Enter location name.." name-dir>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.locationName">Please enter location name .</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.address1 == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="address1">Address 1</label>
+                <div>
+                    <input type="text" ng-model="busStation.address1" ng-focus="err.address1=false;" name="address1" class="form-control" placeholder="Enter address1.." name-dir>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.address1">Please enter address1.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.address2 == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="address2 ">Address 2</label>
+                <div>
+                    <input type="text" ng-model="busStation.address2" name="address2" class="form-control" placeholder="Enter address1.." name-dir>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.address2">Please enter address2.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.cityName==true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="cityName">City</label>
+                <div>
+                    <input type="text" ng-model="busStation.cityName" ng-focus="err.cityName=false;" name="cityName " class="form-control" placeholder="Enter city.. " name-dir>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.cityName ">Please enter city.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.district==true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="district">District</label>
+                <div>
+                    <input type="text" ng-model="busStation.district" ng-focus="err.district=false;" name="district " class="form-control" placeholder="Enter district.. " name-dir>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.district ">Please enter district.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.state==true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="state">State</label>
+                <div>
+                    <input type="text" ng-model="busStation.state" ng-focus="err.state=false;" name="state " class="form-control" placeholder="Enter state.. ">
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.state ">Please enter state.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.pincode==true) ? 'has-error' : (err.pincode_cdn == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="pincode">Pincode</label>
+                <div>
+                    <input type="text" ng-model="busStation.pincode" ng-focus="err.pincode=false;err.pincode_cdn=false" name="pincode " class="form-control" placeholder="Enter pincode.. " pincode-dir>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.pincode ">Please enter pincode.</span>
+                    <span class="text-danger " ng-show="err.pincode_cdn ">Pincode length should be 6 digits.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.contactPerson==true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="contactPerson">Contact Person Name</label>
+                <div>
+                    <input type="text" ng-model="busStation.contactPerson" ng-focus="err.contactPerson=false;" name="contactPerson " class="form-control" placeholder="Enter contact person name.. " name-dir>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.contactPerson ">Please contact person name.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.phone==true) ? 'has-error' : (err.phone_cdn == true) ? 'has-error' : 'has-primary' "><label class="control-label" for="phone">Phone</label>
+                <div>
+                    <input type="text" ng-model="busStation.phone" ng-focus="err.phone=false;err.phone_cdn=false" name="phone " class="form-control" placeholder="Enter phone number.. " phone-num-dir>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.phone ">Please enter contact person phone number.</span>
+                    <span class="text-danger " ng-show="err.phone_cdn ">Phone number should be of 10 digits.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.email==true) ? 'has-error' : (err.email_cdn == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="email">Email</label>
+                <div>
+                    <input type="text" ng-model="busStation.email" ng-focus="err.email=false;err.email_cdn=false" name="email " class="form-control" placeholder="Enter email.. ">
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.email ">Please contact person email.</span>
+                    <span class="text-danger " ng-show="err.email_cdn ">Please enter valid email.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-warning " ng-click="cancelBusStation();" style="width:100px;"> Cancel</button>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="saveBusStation(busStation);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updateBusStation(busStation);" style="width:100px; "> Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,85 @@
+<div class="block">
+    <div class="block-title">
+        <h2><strong>{{page.title}}</strong> </h2>
+    </div>
+    <form class="form-horizontal form-bordered row" onsubmit="return false;" novalidate>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.name == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="name">Name</label>
+                <div>
+                    <input type="text" ng-model="screen.name" ng-focus="err.name=false;" class="form-control" placeholder="Enter screen name..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.name">Please enter name .</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.orientation == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="orientation">Orientation</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="screen.orientation" ng-class="(err.orientation==true) ? 'justBorder' : '' " ng-focus="err.orientation=false;">
+                        <option value="">Select Orientation</option>
+                        <option value="HORIZONTAL">Horizontal</option>
+                        <option value="VERTICAL">Vertical</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.orientation">Please select orientation.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.resolution == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="resolution">Width</label>
+                <div>
+                    <input type="text" ng-model="screen.resolution" ng-focus="err.resolution=false;" class="form-control" placeholder="Enter screen resolution..">
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.resolution">Please enter screen resolution.</span>
+                </div>
+            </div>
+            <!--  <div class="form-group col-xs-6" ng-class="(err.height == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="height ">Height</label>
+                <div>
+                    <input type="text" ng-model="screen.height" ng-focus="err.height=false;" class="form-control" placeholder="Enter screen height..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.height">Please enter screen height.</span>
+                </div>
+            </div> -->
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group col-xs-6" ng-class="(err.browserType == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="width">Browser Type</label>
+                <div>
+                    <select class="form-control" size="1" ng-model="screen.browserType" ng-class="(err.browserType==true) ? 'justBorder' : '' " ng-focus="err.browserType=false;">
+                        <option value="">Select browser</option>
+                        <option value="Chrome">Chrome</option>
+                        <option value="Firefor">Firefox</option>
+                        <option value="Opera">Opera</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-danger " ng-show="err.browserType">Please select browser type.</span>
+                </div>
+            </div>
+            <div class="form-group col-xs-6" ng-class="(err.version == true) ? 'has-error' : 'has-primary' ">
+                <label class="control-label" for="version">Version</label>
+                <div>
+                    <input type="text" ng-model="screen.version" ng-focus="err.version=false;" class="form-control" placeholder="Enter browser version..">
+                </div>
+                <div>
+                    <span class="text-danger" ng-show="err.version">Please enter version.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group form-actions">
+                <div>
+                    <button class="btn btn-md btn-warning " ng-click="cancelScreen();" style="width:100px;"> Cancel</button>
+                    <button class="btn btn-md btn-primary" ng-if="page.type=='post'" ng-click="saveScreen(screen);" style="width:100px; "> Save</button>
+                    <button ng-if="page.type=='put'" class="btn btn-md btn-primary" ng-click="updateScreen(screen);" style="width:100px; "> Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
